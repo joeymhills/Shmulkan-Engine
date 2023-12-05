@@ -71,9 +71,13 @@ private:
         VkPhysicalDeviceFeatures deviceFeatures;
         vkGetPhysicalDeviceProperties(device, &deviceProperties);
         vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
-
+        QueueFamilyIndices indices = findQueueFamilies(device);
+        
+        return indices.is_complete();
+        /* 
         return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
                deviceFeatures.geometryShader;
+        */
     }
 
     //Asseses GPU competency
@@ -133,6 +137,10 @@ private:
     
     struct QueueFamilyIndices {
         std::optional<uint32_t> graphicsFamily;
+
+        bool is_complete(){
+            return graphicsFamily.has_value();
+        }
     };
     
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
@@ -148,7 +156,9 @@ private:
             if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
                 indices.graphicsFamily = i;
             }
-
+            if (indices.is_complete()){
+                break;
+            }
             i++;
         }
         // Logic to find queue family indices to populate struct with
