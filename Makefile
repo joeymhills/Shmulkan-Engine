@@ -1,10 +1,11 @@
-STB_INCLUDE_PATH = ~/tools/stb
+STB_INCLUDE_PATH = /home/joey/tools/stb
+TINYOBJ_INCLUDE_PATH = /home/joey/tools/tinyobjloader
 
-CFLAGS = -std=c++17
-LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi -I$(STB_INCLUDE_PATH)
+CFLAGS = -std=c++17 -I$(TINYOBJ_INCLUDE_PATH) -I$(STB_INCLUDE_PATH)
+LDFLAGS = -lglfw -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi 
 
 shmulkan: main.cpp
-	g++ $(CFLAGS) -o shmulkan main.cpp -L$(STB_INCLUDE_PATH) $(LDFLAGS)
+	g++ $(CFLAGS) -o shmulkan main.cpp $(LDFLAGS)
 
 .PHONY: test clean
 
