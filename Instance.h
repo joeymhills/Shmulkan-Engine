@@ -11,5 +11,7 @@
 namespace ShmulkInstance {
 
     void createInstance(std::vector<const char*> validationLayers, VkInstance* instance);
+    
+    void createSurface(VkInstance* instance, GLFWwindow* window, VkSurfaceKHR* surface);
 
 } // namespace ShmulkInstance

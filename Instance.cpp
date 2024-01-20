@@ -1,3 +1,7 @@
+#include <vulkan/vulkan_core.h>
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
 #include "Instance.h"
 #include "Utility.h"
 #include "Debug.h"
@@ -43,4 +47,11 @@ namespace ShmulkInstance {
             throw std::runtime_error("failed to create instance!");
         }
     }
+
+    void createSurface(VkInstance* instance, GLFWwindow* window, VkSurfaceKHR* surface) {
+        if (glfwCreateWindowSurface(*instance, window, nullptr, surface) != VK_SUCCESS) {
+            throw std::runtime_error("failed to create window surface!");
+        }
+    }
+
 }
